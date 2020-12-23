@@ -1,0 +1,23 @@
+{
+    "name": "tolkam/layers-base-doctrine",
+    "description": "Doctrine helpers for tolkam/layers-base",
+    "type": "library",
+    "license": "proprietary",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Tolkam\\Layers\\Base\\": "src"
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "doctrine/dbal": "^2.12",
+        "tolkam/layers-base": "^1.0@dev"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
