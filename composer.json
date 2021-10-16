@@ -16,8 +16,8 @@
         }
     },
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "doctrine/dbal": "^2.12",
-        "tolkam/layers-base": "^0.1.0"
+        "tolkam/layers-base": "^1.0"
     }
 }
