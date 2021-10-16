@@ -25,11 +25,11 @@ class Aliases
             foreach ($cols as $col) {
                 if (is_array($col)) {
                     $colName = key($col);
-                    $aliasName = "\"{$alias}{$glue}{$col[$colName]}\"";
+                    $aliasName = "\"$alias$glue$col[$colName]\"";
                 }
                 else {
-                    $colName = "{$alias}{$glue}`{$col}`";
-                    $aliasName = "\"{$alias}{$glue}{$col}\"";
+                    $colName = "$alias$glue`$col`";
+                    $aliasName = "\"$alias$glue$col\"";
                 }
                 
                 $columns[] = "$colName $aliasName";
@@ -56,7 +56,7 @@ class Aliases
         $arr = [];
         
         foreach ($row as $name => $value) {
-            if (strpos($name, $glue) !== false) {
+            if (str_contains($name, $glue)) {
                 [$alias, $name] = explode($glue, $name);
                 $arr[$alias][$name] = $value;
             }

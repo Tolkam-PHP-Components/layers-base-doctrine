@@ -59,6 +59,7 @@ abstract class DoctrineFilterHandler implements DoctrineFilterHandlerInterface
      * Gets the tables
      *
      * @return array|string[]
+     * @noinspection PhpDocSignatureInspection
      */
     protected function getTables(): array
     {

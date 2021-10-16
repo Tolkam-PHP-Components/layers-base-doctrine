@@ -8,6 +8,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Generator;
 use Tolkam\Layers\Base\Domain\Collection\SnapshotCollection;
 use Tolkam\Layers\Base\Domain\Entity\Snapshot;
+use Tolkam\Layers\Base\Domain\Entity\SnapshotInterface;
 use Tolkam\Layers\Base\Domain\Repository\Filters;
 use Tolkam\Layers\Base\Domain\Repository\Pagination;
 use Tolkam\Layers\Base\Domain\Store\SnapshotStoreException;
@@ -178,9 +179,9 @@ abstract class DoctrineSnapshotStore implements SnapshotStoreInterface
      *
      * @param array $row
      *
-     * @return Snapshot|mixed
+     * @return SnapshotInterface
      */
-    protected function createSnapshot(array $row): Snapshot
+    protected function createSnapshot(array $row): SnapshotInterface
     {
         $collection = static::newCollection();
         
@@ -210,12 +211,12 @@ abstract class DoctrineSnapshotStore implements SnapshotStoreInterface
     
     /**
      * @param array|string|null $columns
-     * @param string|null       $alias
+     * @param string            $alias
      *
      * @return QueryBuilder
      */
     protected function baseSelect(
-        $columns = null,
+        array|string $columns = null,
         string $alias = self::PRIMARY_ALIAS
     ): QueryBuilder {
         return $this->connection->createQueryBuilder()
