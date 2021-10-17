@@ -94,7 +94,7 @@ abstract class DoctrineSnapshotStore implements SnapshotStoreInterface
         
         $query = $this->baseSelect()
             ->andWhere(static::identifierName() . ' IN (:values)')
-            ->setParameter(':values', $values, $paramType);
+            ->setParameter('values', $values, $paramType);
         
         return $this->setQuery($query);
     }
@@ -290,10 +290,10 @@ abstract class DoctrineSnapshotStore implements SnapshotStoreInterface
         
         foreach ($where as $k => $v) {
             $query->andWhere("`$k` = :$k")
-                ->setParameter(":$k", $v);
+                ->setParameter($k, $v);
         }
         
-        if ($query->execute()->rowCount() === 0) {
+        if ($query->executeStatement() === 0) {
             $affected = $this->connection->insert($table, $data, $types);
         }
         else {
