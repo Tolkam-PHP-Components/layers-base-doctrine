@@ -276,6 +276,7 @@ abstract class DoctrineSnapshotStore implements SnapshotStoreInterface
      * @param array  $data
      * @param array  $where
      * @param array  $types
+     * @param string $columnQuoteCharacter
      *
      * @return int
      */
@@ -283,13 +284,15 @@ abstract class DoctrineSnapshotStore implements SnapshotStoreInterface
         string $table,
         array $data,
         array $where,
-        array $types = []
+        array $types = [],
+        string $columnQuoteCharacter = '`'
     ): int {
         
-        $query = $this->baseSelect('`' . implode('`, `', array_keys($where)) . '`');
+        $c = $columnQuoteCharacter;
+        $query = $this->baseSelect($c . implode("$c, $c", array_keys($where)) . $c);
         
         foreach ($where as $k => $v) {
-            $query->andWhere("`$k` = :$k")
+            $query->andWhere("$c$k$c = :$k")
                 ->setParameter($k, $v);
         }
         
